@@ -85,6 +85,10 @@ public class medium1  implements ActionListener {
         submitButton.setActionCommand("Submit");
         cancelButton.setActionCommand("Cancel");
 
+
+
+
+
         okButton.addActionListener(new ButtonClickListener());
         submitButton.addActionListener(new ButtonClickListener());
         cancelButton.addActionListener(new ButtonClickListener());
