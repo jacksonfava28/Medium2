@@ -5,6 +5,8 @@ import javax.swing.*;
 public class medium1  implements ActionListener {
     private JFrame mainFrame;
     private JLabel statusLabel;
+    private JLabel numberLabel;
+    private JLabel numbersLabel;
     private JPanel controlPanel;
     private JMenuBar mb;
     private JMenu file, edit, help;
@@ -57,8 +59,11 @@ public class medium1  implements ActionListener {
         //  mainFrame.add(ta);//add typing area
         mainFrame.setJMenuBar(mb); //set menu bar
 
-          statusLabel = new JLabel("", JLabel.CENTER);
-            statusLabel.setSize(350, 100);
+        statusLabel = new JLabel("", JLabel.CENTER);
+        statusLabel.setSize(350, 100);
+
+        numberLabel= new JLabel("Label 1", JLabel.CENTER);
+        numbersLabel= new JLabel("Label 2", JLabel.CENTER);
 
         mainFrame.addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent windowEvent) {
@@ -68,8 +73,7 @@ public class medium1  implements ActionListener {
          controlPanel = new JPanel();
            controlPanel.setLayout(new GridLayout(2,3)); //set the layout of the pannel
 
-          mainFrame.add(controlPanel);
-             mainFrame.add(statusLabel);
+        mainFrame.add(controlPanel);
         mainFrame.setVisible(true);
     }
 
@@ -95,8 +99,10 @@ public class medium1  implements ActionListener {
 
         mainFrame.add(okButton,BorderLayout.NORTH);
         controlPanel.add(submitButton,BorderLayout.EAST);
+        controlPanel.add(numberLabel);
         mainFrame.add(cancelButton,BorderLayout.SOUTH);
         controlPanel.add(submittButton,BorderLayout.WEST);
+        controlPanel.add(numbersLabel);
         controlPanel.add(cancelttButton,BorderLayout.CENTER);
 
         mainFrame.setVisible(true);
