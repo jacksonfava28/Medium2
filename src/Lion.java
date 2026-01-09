@@ -1,6 +1,4 @@
-import java.sql.SQLOutput;
-
-public class Lion implements Mammal {
+public class Lion  {
     private  int clawLength;
     int wieght;
     int lenght;
@@ -33,13 +31,13 @@ public class Lion implements Mammal {
 
 
 
-    @Override
+   // @Override
     public void walk() {
         x =100;
         System.out.println("step step step");
     }
 
-    @Override
+    //@Override
     public void eat() {
         System.out.println("nom nom");
     }
