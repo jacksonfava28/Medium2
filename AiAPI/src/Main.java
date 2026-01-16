@@ -10,7 +10,7 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
-public class HeroFight implements ActionListener {
+public class Main implements ActionListener {
 
     private JFrame frame;
     private JTextField heroAField;
@@ -23,10 +23,10 @@ public class HeroFight implements ActionListener {
     private JSONArray heroes;
 
     public static void main(String[] args) {
-        new HeroFight();
+        new Main();
     }
 
-    public HeroFight() {
+    public Main() {
         loadData();
         prepareGUI();
     }
@@ -146,8 +146,8 @@ public class HeroFight implements ActionListener {
         fightButton = new JButton("Fight!");
         fightButton.addActionListener(this);
 
-        imageA = new JLabel("", SwingConstants.CENTER);
-        imageB = new JLabel("", SwingConstants.CENTER);
+        imageA = new JLabel("", SwingConstants.LEFT);
+        imageB = new JLabel("", SwingConstants.RIGHT);
 
         resultsArea = new JTextArea();
         resultsArea.setEditable(false);
