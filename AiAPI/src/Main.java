@@ -234,18 +234,13 @@ public class Main implements ActionListener {
         int durability   = ((Number) stats.get("durability")).intValue();
         int power        = ((Number) stats.get("power")).intValue();
         int combat       = ((Number) stats.get("combat")).intValue();
-
-       // int total = intelligence * 1 + strength * 2 + speed * 1 + durability * 2 + power * 2 + combat * 1;
-       // if (total > 500) total = 500 + (total - 500) / 2;
-        // return total;
-        int total = intelligence * 1 + strength * 1 + speed * 1 + durability * 1 + power * 1 + combat * 1;
+        int total = intelligence + strength + speed + durability + power + combat;
         return total;
     }
 
     private List<String> getCategories(JSONObject hero) {
         List<String> categories = new ArrayList<>();
         JSONObject stats = (JSONObject) hero.get("powerstats");
-
         int intelligence = ((Number) stats.get("intelligence")).intValue();
         int strength     = ((Number) stats.get("strength")).intValue();
         int speed        = ((Number) stats.get("speed")).intValue();
@@ -287,9 +282,11 @@ public class Main implements ActionListener {
             label.setIcon(new ImageIcon(img));
             nameLabel.setText((String) hero.get("name"));
             nameLabel.setHorizontalAlignment(JLabel.CENTER);
+            nameLabel.setForeground(Color.CYAN); // Hero name bright for dark mode
         } catch (Exception e) {
             label.setIcon(null);
             nameLabel.setText((String) hero.get("name"));
+            nameLabel.setForeground(Color.CYAN); // fallback color
         }
     }
 
@@ -422,10 +419,21 @@ public class Main implements ActionListener {
         frame.setSize(900, 750);
         frame.setLayout(new BorderLayout());
 
+        Color bgColor = new Color(30, 30, 30);      // Dark mode background
+        Color panelColor = new Color(50, 50, 50);   // Darker panel for buttons
+        Color textColor = Color.WHITE;              // Default text color
+
+        frame.getContentPane().setBackground(bgColor);
+
         // Top Panel: selectors + labels
         JPanel topPanel = new JPanel(new GridLayout(2, 2, 10, 10));
-        topPanel.add(new JLabel("Hero A:"));
-        topPanel.add(new JLabel("Hero B:"));
+        topPanel.setBackground(bgColor);
+        JLabel labelA = new JLabel("Hero A:");
+        JLabel labelB = new JLabel("Hero B:");
+        labelA.setForeground(textColor);
+        labelB.setForeground(textColor);
+        topPanel.add(labelA);
+        topPanel.add(labelB);
         heroABox = new JComboBox<>(getAllHeroNames());
         heroABox.setEditable(true);
         heroBBox = new JComboBox<>(getAllHeroNames());
@@ -435,12 +443,17 @@ public class Main implements ActionListener {
 
         // Center Panel: images + names + stats
         JPanel centerPanel = new JPanel(new GridLayout(2, 4, 10, 10));
+        centerPanel.setBackground(bgColor);
         imageA = new JLabel();
         imageB = new JLabel();
         nameALabel = new JLabel();
+        nameALabel.setForeground(Color.CYAN); // hero name color
         nameBLabel = new JLabel();
+        nameBLabel.setForeground(Color.CYAN);
         statsALabel = new JLabel();
+        statsALabel.setForeground(textColor);
         statsBLabel = new JLabel();
+        statsBLabel.setForeground(textColor);
         centerPanel.add(imageA);
         centerPanel.add(statsALabel);
         centerPanel.add(statsBLabel);
@@ -452,10 +465,16 @@ public class Main implements ActionListener {
 
         // Bottom panel: buttons + results
         JPanel bottomPanel = new JPanel(new GridLayout(2, 1, 10, 10));
+        bottomPanel.setBackground(bgColor);
         JPanel buttonsPanel = new JPanel();
+        buttonsPanel.setBackground(bgColor);
         fightButton = new JButton("Fight!");
+        fightButton.setBackground(panelColor);
+        fightButton.setForeground(Color.ORANGE);
         fightButton.addActionListener(this);
         randomButton = new JButton("Random Fight");
+        randomButton.setBackground(panelColor);
+        randomButton.setForeground(Color.ORANGE);
         randomButton.addActionListener(e -> {
             Random r = new Random();
             heroABox.setSelectedIndex(r.nextInt(heroABox.getItemCount()));
@@ -463,6 +482,8 @@ public class Main implements ActionListener {
             fight((String)heroABox.getSelectedItem(), (String)heroBBox.getSelectedItem());
         });
         clearButton = new JButton("Clear");
+        clearButton.setBackground(panelColor);
+        clearButton.setForeground(Color.ORANGE);
         clearButton.addActionListener(e -> {
             heroABox.setSelectedIndex(0);
             heroBBox.setSelectedIndex(0);
@@ -480,6 +501,8 @@ public class Main implements ActionListener {
 
         resultsArea = new JTextArea();
         resultsArea.setEditable(false);
+        resultsArea.setBackground(panelColor);
+        resultsArea.setForeground(textColor);
         JScrollPane scroll = new JScrollPane(resultsArea);
 
         bottomPanel.add(buttonsPanel);
