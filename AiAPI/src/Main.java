@@ -282,11 +282,11 @@ public class Main implements ActionListener {
             label.setIcon(new ImageIcon(img));
             nameLabel.setText((String) hero.get("name"));
             nameLabel.setHorizontalAlignment(JLabel.CENTER);
-            nameLabel.setForeground(Color.CYAN); // Hero name bright for dark mode
+            nameLabel.setForeground(new Color(0, 200, 255));// Hero name bright for dark mode
         } catch (Exception e) {
             label.setIcon(null);
             nameLabel.setText((String) hero.get("name"));
-            nameLabel.setForeground(Color.CYAN); // fallback color
+            nameLabel.setForeground(new Color(0, 200, 255)); // fallback color
         }
     }
 
@@ -420,7 +420,7 @@ public class Main implements ActionListener {
         frame.setLayout(new BorderLayout());
 
         Color bgColor = new Color(30, 30, 30);      // Dark mode background
-        Color panelColor = new Color(50, 50, 50);   // Darker panel for buttons
+        Color panelColor = new Color(70, 70, 70);   // Darker panel for buttons
         Color textColor = Color.WHITE;              // Default text color
 
         frame.getContentPane().setBackground(bgColor);
@@ -447,9 +447,9 @@ public class Main implements ActionListener {
         imageA = new JLabel();
         imageB = new JLabel();
         nameALabel = new JLabel();
-        nameALabel.setForeground(Color.CYAN); // hero name color
+        nameALabel.setForeground(new Color(0, 200, 255)); // hero name color
         nameBLabel = new JLabel();
-        nameBLabel.setForeground(Color.CYAN);
+        nameBLabel.setForeground(new Color(0, 200, 255));
         statsALabel = new JLabel();
         statsALabel.setForeground(textColor);
         statsBLabel = new JLabel();
@@ -470,11 +470,11 @@ public class Main implements ActionListener {
         buttonsPanel.setBackground(bgColor);
         fightButton = new JButton("Fight!");
         fightButton.setBackground(panelColor);
-        fightButton.setForeground(Color.ORANGE);
+        fightButton.setForeground(Color.BLACK);
         fightButton.addActionListener(this);
         randomButton = new JButton("Random Fight");
         randomButton.setBackground(panelColor);
-        randomButton.setForeground(Color.ORANGE);
+        randomButton.setForeground(Color.BLACK);
         randomButton.addActionListener(e -> {
             Random r = new Random();
             heroABox.setSelectedIndex(r.nextInt(heroABox.getItemCount()));
@@ -483,7 +483,7 @@ public class Main implements ActionListener {
         });
         clearButton = new JButton("Clear");
         clearButton.setBackground(panelColor);
-        clearButton.setForeground(Color.ORANGE);
+        clearButton.setForeground(Color.BLACK);
         clearButton.addActionListener(e -> {
             heroABox.setSelectedIndex(0);
             heroBBox.setSelectedIndex(0);
@@ -501,7 +501,7 @@ public class Main implements ActionListener {
 
         resultsArea = new JTextArea();
         resultsArea.setEditable(false);
-        resultsArea.setBackground(panelColor);
+        resultsArea.setBackground(new Color(40, 40, 40));
         resultsArea.setForeground(textColor);
         JScrollPane scroll = new JScrollPane(resultsArea);
 
@@ -512,8 +512,33 @@ public class Main implements ActionListener {
         frame.add(centerPanel, BorderLayout.CENTER);
         frame.add(bottomPanel, BorderLayout.SOUTH);
 
+        applyFonts();   fightButton.setForeground(Color.BLACK);
+
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
+    }
+
+    private void applyFonts() {
+        // Font system (clean + readable)
+        Font nameFont = new Font("Segoe UI", Font.BOLD, 18);
+        Font bodyFont = new Font("Segoe UI", Font.PLAIN, 14);
+        Font buttonFont = new Font("Segoe UI", Font.BOLD, 14);
+        Font monoFont = new Font("Consolas", Font.PLAIN, 13);
+
+        heroABox.setFont(bodyFont);
+        heroBBox.setFont(bodyFont);
+
+        nameALabel.setFont(nameFont);
+        nameBLabel.setFont(nameFont);
+
+        statsALabel.setFont(bodyFont);
+        statsBLabel.setFont(bodyFont);
+
+        fightButton.setFont(buttonFont);
+        randomButton.setFont(buttonFont);
+        clearButton.setFont(buttonFont);
+
+        resultsArea.setFont(monoFont);
     }
 
     @Override
@@ -521,3 +546,4 @@ public class Main implements ActionListener {
         fight((String) heroABox.getSelectedItem(), (String) heroBBox.getSelectedItem());
     }
 }
+
